@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+    <title>Deepraj books notes</title>
+    <style>
+      div {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  font-family: "Poetsen One", sans-serif;
+}
+
+/* Styles for the unordered list */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Styles for the list items */
+li {
+  margin-bottom: 72px;
+}
+
+/* Styles for the book cover image */
+li img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles for the book titles */
+h2 {
+  margin: 10px 0;
+}
+
+/* Styles for the book author */
+strong {
+  color: #333;
+}
+
+/* Styles for the book links */
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+    </style>
+</head>
+<body>
+  <div>
+    <% if (books && books.docs && books.docs.length > 0) { %>
+      <ul>
+        <% books.docs.forEach((book) => { %>
+          <li>
+            <% const coverUrl = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`; %>
+            <img src="<%= coverUrl %>" alt="<%= book.title %>" >
+            <% console.log("cover_i: ", coverUrl); %>
+            <% if (book.isbn && book.isbn.length > 0) { %>
+              <a href="/book/<%= book.isbn[0] %>"><h2>Title: <%= book.title %></h2><br></a>
+            <% } else { %>
+              <h2>Title: <%= book.title %></h2><br>
+            <% } %>
+            <strong>Author: <%= book.author_name %></strong><br>
+          </li>
+        <% }); %>
+      </ul>
+    <% } %>    
+  </div>
+</body>
+</html>

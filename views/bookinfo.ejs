@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/main.css">
+    <title>Deepraj books notes</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            border: none;
+            /* font-family: "Arial", sans-serif; */
+            font-family: "Poetsen One", sans-serif;
+            background-color: #f7f9fc;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container2 {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .book {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .book h2 {
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .book p {
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+
+        .book img {
+            max-width: 200px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .book-description {
+            margin-top: 10px;
+        }
+
+        .book-source a {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container2">
+        <h1>Books Information</h1>
+        <div>
+            <img src="<%= book.cover_url %>" alt="Cover Image" style="max-width: 200px;">
+            <h2>
+                <%= book.title %>
+            </h2>
+            <p><strong>Author:</strong>
+                <%= book.author %>
+            </p>
+            <p><strong>ISBN:</strong>
+                <%= book.isbn %>
+            </p>
+            <p><strong>Publish Date:</strong>
+                <%= book.publish_date ? new Date(book.publish_date).toLocaleDateString() : 'Not available' %>
+            </p>
+            <p>
+                <strong>Star Rating:</strong>
+                ⭐⭐⭐⭐
+            </p>
+            <p><strong>Description:</strong>
+                <%= book.description %>
+            </p>
+            <p>
+                <strong>My Review:</strong>
+                <%= book.note %>
+            </p>
+            <form action="/book/delete/<%= book.book_id %>" method="POST">
+                <!-- Form fields go here -->
+                <button type="submit">Delete</button>
+              </form>                    
+            <% if(book.source) { %>
+                <p><strong>Source:</strong> <a href="<%= book.source %>">Link</a></p>
+                <% } %>
+            </div>
+            <hr>
+        </div>
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepraj books notes</title>
+    <style>
+      .container{
+        margin-left: 300px;
+        margin-right: 300px;
+      }
+      h1{
+        text-align: center;
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        color: #444;
+      }
+
+      h2 {
+         font-family: monospace;
+         font-size: 2.5em;
+         margin-bottom: 10px;
+         color: #555;
+        }
+
+      img{
+        margin-right: 20px;
+      }
+
+      .sum{
+         font-family: monospace;
+         font-size: 1.5em;
+         color: #555;
+      }
+
+      textarea{
+        width: 100%;
+        height: 150px;
+        padding: 12px 20px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        resize: none;
+      }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Book Details</h1>
+    <form method="POST" action="/submit-book">
+        <img src="<%= bookCovers %>" alt="" style="float: left;">
+        <div class="book_details">
+            <% if (books && Object.keys(books).length > 0) { %>
+                <% const firstBookKey = Object.keys(books)[0]; %>
+                <% const firstBook = books[firstBookKey]; %>
+                <% if (firstBook) { %>
+                    <h2>
+                        <% console.log('Title:', firstBook.details.title); %>
+                        <% console.log('Author Name:', firstBook.details.authors.map(author => author.name).join(', ')); %>
+                        <% console.log('URL Name:', firstBook.preview_url); %>
+                        <%= firstBook.details.title %> - By <%= firstBook.details.authors.map(author => author.name).join(', ') %>
+                    </h2>              
+                    <small>ISBN: <%= firstBookKey.substring(5) %>.</small> <small>Publish Date: <%= firstBook.details.publish_date %></small>
+                    <P class="sum"><%= workDetails %></P>
+                    <% console.log('Summary:', workDetails); %>
+                    <a href="<%= firstBook.preview_url %>"><p>Ebooks</p></a>
+                    <% console.log('preview_url:', firstBook.preview_url); %>
+                    <!-- Input field for review -->
+                    <label for="review">Review:</label>
+                    <!-- <textarea id="review" name="review" rows="4" cols="50"></textarea> -->
+                    <!-- Hidden input fields to store book details -->
+                    <input type="text" id="bookTitle" name="note">
+                    <!-- Add input fields here for any additional information you want to submit -->
+                    <button type="submit">Submit</button>
+                <% } else { %>
+                    <p>No books found.</p>
+                <% } %>
+            <% } else { %>
+                <p>No books found.</p>
+            <% } %>
+        </div>
+    </form>
+</div>
+
+
+</body>
+</html>
+  
